@@ -1,19 +1,19 @@
 # Particle Forge - An accurate and efficient particle simulator
 
 ### The plan:
-Requirements & Architecture Planning
+Requirements & Architecture Planning ✅
 
     Define core functionalities: physics simulation (engine) and user interaction (particle spawning, display, and UI).
     Decide on a clean separation of concerns (e.g., modules or plugins) for the engine and UI.
 
-Project Setup & Dependency Management
+Project Setup & Dependency Management ✅
 
     Initialize a new Cargo project and set up version control.
     Add dependencies:
         Bevy for game engine and rendering.
         bevy_egui (or similar) for integrating a UI panel (egui) into the game.
 
-Define Data Structures & Core Types
+Define Data Structures & Core Types ✅
 
     Create base data structures for particles (using a common Particle trait or enum to represent Proton, Neutron, and Electron).
     Define properties such as mass, charge, position, velocity, etc., ensuring each particle type can later be extended with more characteristics.
