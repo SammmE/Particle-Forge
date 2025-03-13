@@ -2,29 +2,31 @@ use bevy::prelude::*;
 use crate::engine::physics::{calculate_next_state, commit_state};
 use crate::engine::particles::{Proton, Neutron, Electron};
 
-/// System to perform a two-phase simulation step:
-/// 1. Calculate the next state for all particles.
-/// 2. Commit the next state as the current state.
-pub fn simulation_step(
+/// System for calculating the next state.
+pub fn calculate_next_state_system(
     mut proton_query: Query<&mut Proton>,
     mut neutron_query: Query<&mut Neutron>,
     mut electron_query: Query<&mut Electron>,
     time: Res<Time>,
 ) {
-    let delta_time = time.delta_seconds();
-
-    // Phase 1: Calculate the next state based on current state
+    let dt = time.delta_seconds();
     for mut proton in proton_query.iter_mut() {
-        calculate_next_state(&mut proton, delta_time);
+        calculate_next_state(&mut proton, dt);
     }
     for mut neutron in neutron_query.iter_mut() {
-        calculate_next_state(&mut neutron, delta_time);
+        calculate_next_state(&mut neutron, dt);
     }
     for mut electron in electron_query.iter_mut() {
-        calculate_next_state(&mut electron, delta_time);
+        calculate_next_state(&mut electron, dt);
     }
+}
 
-    // Phase 2: Commit the next state to current state
+/// System for committing the next state.
+pub fn commit_state_system(
+    mut proton_query: Query<&mut Proton>,
+    mut neutron_query: Query<&mut Neutron>,
+    mut electron_query: Query<&mut Electron>,
+) {
     for mut proton in proton_query.iter_mut() {
         commit_state(&mut proton);
     }
